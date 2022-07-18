@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<usb>
+    <!-- Logitech C200, VID 046D PID 0802 -->
+    <usb-device
+        product-id="2050"
+        vendor-id="1133" />
+</usb>
