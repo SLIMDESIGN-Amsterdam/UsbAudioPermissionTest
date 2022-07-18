@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">USB Audio Permission Test</string>
+    <string name="record_permission_granted">Record permission was granted. You can now add your USB audio device in the app resources.</string>
+    <string name="record_permission_denied">Record permission was denied.</string>
+    <string name="record_permission_available">Record permission is available. You can now add your USB audio device in the app resources.</string>
+    <string name="record_access_required">Audio recording access is required to test the USB audio permission behavior.</string>
+    <string name="record_permission_not_available">Permission is not available. Requesting audio permission.</string>
+    <string name="test_audio_permission">Test audio permission</string>
 </resources>
