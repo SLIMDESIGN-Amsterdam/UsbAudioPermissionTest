@@ -2,11 +2,17 @@ package com.slimdesign.usbaudiopermission
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.hardware.usb.UsbManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import androidx.core.app.ActivityCompat
+import androidx.core.content.getSystemService
+import androidx.core.os.postDelayed
 import com.google.android.material.snackbar.Snackbar
 import com.slimdesign.usbaudiopermission.util.checkSelfPermissionCompat
 import com.slimdesign.usbaudiopermission.util.requestPermissionsCompat
@@ -18,6 +24,8 @@ private const val PERMISSION_REQUEST = 0
 class MainActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissionsResultCallback {
 
     private lateinit var layout: View
+
+    private val usbListHandler = Handler(Looper.getMainLooper())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,5 +96,31 @@ class MainActivity : AppCompatActivity(), ActivityCompat.OnRequestPermissionsRes
 
     private fun fakeStartRecording() {
         // Won't actually do anything here.
+    }
+
+    private lateinit var updateTask: Runnable
+
+    override fun onResume() {
+        super.onResume()
+        updateTask = Runnable {
+            val usbManager = getSystemService<UsbManager>()!!
+            val xmlText = usbManager.deviceList.map { (_, device) ->
+                val vid = device.vendorId
+                val pid = device.productId
+                "    <usb-device\n" +
+                        "        product-id=\"$pid\"\n" +
+                        "        vendor-id=\"$vid\" />\n"
+            }
+
+            findViewById<TextView>(R.id.text_data).text = xmlText.joinToString(separator = "\n")
+
+            usbListHandler.postDelayed(updateTask, 1000)
+        }
+        updateTask.run()
+    }
+
+    override fun onPause() {
+        usbListHandler.removeCallbacksAndMessages(null)
+        super.onPause()
     }
 }

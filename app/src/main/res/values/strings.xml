@@ -6,4 +6,5 @@
     <string name="record_access_required">Audio recording access is required to test the USB audio permission behavior.</string>
     <string name="record_permission_not_available">Permission is not available. Requesting audio permission.</string>
     <string name="test_audio_permission">Test audio permission</string>
+    <string name="text_header">Add the following to the app\'s src/main/res/xml/device_list.xml:</string>
 </resources>

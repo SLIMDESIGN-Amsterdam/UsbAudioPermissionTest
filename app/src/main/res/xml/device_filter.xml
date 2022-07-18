@@ -4,4 +4,6 @@
     <usb-device
         product-id="2050"
         vendor-id="1133" />
+
+    <!-- Add your USB device here -->
 </usb>
