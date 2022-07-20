@@ -5,5 +5,10 @@
         product-id="2050"
         vendor-id="1133" />
 
+    <!-- Logitech C270, VID 046D PID 0825 -->
+    <usb-device
+        product-id="2085"
+        vendor-id="1133" />
+
     <!-- Add your USB device here -->
 </usb>
